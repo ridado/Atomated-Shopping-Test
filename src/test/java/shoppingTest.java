@@ -1,3 +1,6 @@
+// klasa testowa próbna
+
+
 import Pages.LoginPage;
 import Pages.StartPage;
 import helpers.WebDriverFactory;
@@ -46,7 +49,6 @@ public class shoppingTest {
 
         //act
         startPage.itemChoose(itemName);
-        Assertions.assertEquals(discountPercentage, startPage.isDiscount());
 
 
 

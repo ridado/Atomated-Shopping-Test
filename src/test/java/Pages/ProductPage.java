@@ -19,6 +19,10 @@ public class ProductPage {
     @FindBy(xpath = "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[2]")
     private WebElement addToCartButton;
 
+    @FindBy(xpath = "//*[@id=\"main\"]/div[1]/div[2]/div[1]/div[2]/div/span[2]")
+    private WebElement discountLevel;
+
+
     public ProductPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -42,6 +46,10 @@ public class ProductPage {
             Assert.fail();
 
         driver.findElement(By.xpath("//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[2]/div/div/a")).click();
+    }
+    public void isDiscountCorrect() {
+        discountLevel.getText();
+
     }
 
 }

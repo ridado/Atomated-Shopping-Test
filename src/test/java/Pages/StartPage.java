@@ -28,8 +28,5 @@ public class StartPage {
     public void itemChoose(String name){
         productTitle.click();
     }
-    public String isDiscount(){
-       return discountField.getText();
-    }
     
 }

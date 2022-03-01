@@ -1,24 +1,20 @@
 package bdd;
 
-import Pages.LoginPage;
-import Pages.ProductPage;
-import Pages.ShoppingCartPage;
-import Pages.StartPage;
+import Pages.*;
 import helpers.WebDriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.*;
 
 import java.io.File;
 
 public class MyStoreShoppingTestStepsDefinition {
     private WebDriver driver;
+
+    String orderAmount;
 
     @Given("User is on shop main page")
     public void userIsOnShopMainPage() {
@@ -47,9 +43,7 @@ public class MyStoreShoppingTestStepsDefinition {
         String itemName = "Hummingbird printed sweater";
         String discountPercentage = "20";
 
-//        Assertions.assertEquals(discountPercentage, startPage.isDiscount());
         startPage.itemChoose(itemName);
-
     }
 
     @When("user checks is discount actual choose size and quantity")
@@ -57,7 +51,10 @@ public class MyStoreShoppingTestStepsDefinition {
         ProductPage productPage = new ProductPage(driver);
 
         String itemSize = "l";
-        String itemQuantity = "5"; // sprawdzi dostępność
+        String itemQuantity = "5";// sprawdzi dostępność
+        String discount = "SAVE 20%";
+
+//        Assertions.assertEquals("Save 20%", productPage.isDiscountCorrect();
 
         productPage.sizeInput(itemSize);
         productPage.quantityInput(itemQuantity);
@@ -95,18 +92,29 @@ public class MyStoreShoppingTestStepsDefinition {
 
     @Then("user takes screenshot of order confirmation")
     public void userTakesScreenshotOfOrderConfirmation() throws Exception {
+        OrderConfirmedPage orderConfirmedPage = new OrderConfirmedPage(driver);
 //        driver.get("http://www.google.com/");
 //        TakesScreenshot scrFile = (TakesScreenshot)driver;
 //        File source = scrFile.getScreenshotAs(OutputType.FILE);
-//        FileUtils.copyFile(source, new File("./files/screenshot.png"));
+//        FileUtils.copyFiles(source, new File("./files/screenshot.png"));
+        orderAmount = orderConfirmedPage.getOrderAmount();
+
     }
 
     @Then("user go to account order history and checks amount and status")
     public void userGoToAccountOrderHistoryAndChecksAmountAndStatus() {
+        OrderConfirmedPage orderConfirmedPage = new OrderConfirmedPage(driver);
+        YourAccountPage yourAccountPage = new YourAccountPage(driver);
+        OrderHistoryPage orderHistoryPage = new OrderHistoryPage(driver);
+
+        orderConfirmedPage.goToUserAccount();
+        yourAccountPage.goToOrderHistory();
+        Assertions.assertEquals(orderAmount, orderHistoryPage.checkTotalPrice());
+
     }
 
     @Then("shut down browser")
     public void shutDownBrowser() {
-//        driver.quit();
+        driver.quit();
     }
 }
