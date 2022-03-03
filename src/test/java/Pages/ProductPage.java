@@ -16,7 +16,7 @@ public class ProductPage {
     @FindBy(id = "quantity_wanted")
     private WebElement quantityField;
 
-    @FindBy(xpath = "//*[@id=\"add-to-cart-or-refresh\"]/div[2]/div/div[2]")
+    @FindBy(className = "add-to-cart")
     private WebElement addToCartButton;
 
     @FindBy(xpath = "//*[@id=\"main\"]/div[1]/div[2]/div[1]/div[2]/div/span[2]")
@@ -29,7 +29,7 @@ public class ProductPage {
     }
 
     public void sizeInput(String size){
-//        sizeDropDownField.click();
+
         sizeDropDownField.sendKeys(size);
         sizeDropDownField.click();
     }
@@ -40,10 +40,11 @@ public class ProductPage {
         quantityField.click();
     }
     public void clickAddToCartButton(){
-        if(addToCartButton.isEnabled())
-            addToCartButton.click();
-        else
-            Assert.fail();
+        addToCartButton.click();
+//        if(addToCartButton.isEnabled())
+//            addToCartButton.click();
+//        else
+//            Assert.fail();
 
         driver.findElement(By.xpath("//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[2]/div/div/a")).click();
     }

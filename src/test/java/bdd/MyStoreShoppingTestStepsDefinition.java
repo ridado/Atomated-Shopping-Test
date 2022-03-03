@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 
@@ -41,8 +42,6 @@ public class MyStoreShoppingTestStepsDefinition {
         StartPage startPage = new StartPage(driver);
 
         String itemName = "Hummingbird printed sweater";
-        String discountPercentage = "20";
-
         startPage.itemChoose(itemName);
     }
 
@@ -93,10 +92,10 @@ public class MyStoreShoppingTestStepsDefinition {
     @Then("user takes screenshot of order confirmation")
     public void userTakesScreenshotOfOrderConfirmation() throws Exception {
         OrderConfirmedPage orderConfirmedPage = new OrderConfirmedPage(driver);
-//        driver.get("http://www.google.com/");
-//        TakesScreenshot scrFile = (TakesScreenshot)driver;
-//        File source = scrFile.getScreenshotAs(OutputType.FILE);
-//        FileUtils.copyFiles(source, new File("./files/screenshot.png"));
+
+        TakesScreenshot scrFile = (TakesScreenshot)driver;
+        File source = scrFile.getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(source, new File("./src/files/screenshot.png"));
         orderAmount = orderConfirmedPage.getOrderAmount();
 
     }
