@@ -48,8 +48,8 @@ public class ProductPage {
 
         driver.findElement(By.xpath("//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[2]/div/div/a")).click();
     }
-    public void isDiscountCorrect() {
-        discountLevel.getText();
+    public String isDiscountCorrect() {
+        return discountLevel.getText();
 
     }
 

@@ -27,8 +27,8 @@ public class MyStoreShoppingTestStepsDefinition {
     @When("user log in to account and go back to main page")
     public void userLogInToAccountAndGoBackToMainPage() {
 
-        String email = "krystyna.malina@mail.com";
-        String password = "asd12345";
+        String email = "bolek.lolek@mail.com";
+        String password = "Super123";
 
         StartPage startPage = new StartPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -49,11 +49,11 @@ public class MyStoreShoppingTestStepsDefinition {
     public void userChecksIsDiscountActualChooseSizeAndQuantity() {
         ProductPage productPage = new ProductPage(driver);
 
-        String itemSize = "l";
+        String itemSize = "s";
         String itemQuantity = "5";// sprawdzi dostępność
         String discount = "SAVE 20%";
 
-//        Assertions.assertEquals("Save 20%", productPage.isDiscountCorrect();
+        Assertions.assertEquals(discount, productPage.isDiscountCorrect());
 
         productPage.sizeInput(itemSize);
         productPage.quantityInput(itemQuantity);
